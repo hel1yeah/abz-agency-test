@@ -1,0 +1,22 @@
+
+html {
+  font-family: Nunito, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  background: {
+    color: $background-color
+  }
+}
+
+h1 {
+  font-family: Nunito, sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
