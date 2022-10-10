@@ -1,5 +1,5 @@
 <template>
-  <button :class="['app-button', isButtonDisabled]">
+  <button :class="['app-button', isButtonDisabledClass]" :disabled="isButtonDisabled">
     <span>
       <slot></slot>
     </span>
@@ -17,16 +17,21 @@ const props = defineProps({
   },
 });
 
-const isButtonDisabled = computed(() => {
+const isButtonDisabledClass = computed(() => {
   return {
     disabled: props.disabled,
   };
+});
+
+const isButtonDisabled = computed(() => {
+  return props.disabled;
 });
 </script>
 
 <style scoped lang="scss">
 .app-button {
   background: $primary-color;
+  color: $black-color;
   height: 34px;
   border-radius: 80px;
   border: none;
@@ -39,6 +44,7 @@ const isButtonDisabled = computed(() => {
     background: {
       color: $disabled-color;
     }
+    color: $white;
   }
 }
 </style>

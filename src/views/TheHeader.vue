@@ -29,12 +29,15 @@ import AppButton from '@/components/common/AppButton.vue';
     padding: 13px 32px;
   }
   @include w360 {
-    padding: 13px 16px;
+    padding: 13px 7px;
   }
   &__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include w360 {
+      gap: 14px;
+    }
 
   }
   &__buttons {
