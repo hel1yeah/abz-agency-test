@@ -13,15 +13,19 @@
       src="@/assets/images/photo-cover.svg"
       :alt="props.user.name"
     />
+
     <span class="working-card__text working-card__name">{{ props.user.name }} </span>
     <span class="working-card__text working-card__position">{{ props.user.position }}</span>
-    <span class="working-card__text working-card__email">{{ props.user.email }}</span>
+    <app-tooltip :text="props.user.email">
+      <span class="working-card__text working-card__email">{{ props.user.email }}</span>
+    </app-tooltip>
     <span class="working-card__text working-card__number">{{ props.user.phone }}</span>
   </div>
 </template>
 
 <script setup>
 import { nextTick, ref, onDeactivated } from 'vue';
+import AppTooltip from '@/components/common/AppTooltip.vue';
 
 const props = defineProps({
   user: {
@@ -54,7 +58,7 @@ onDeactivated(() => {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: #ffffff;
+  background: $white;
   border-radius: 10px;
   padding: 20px;
   &__img {

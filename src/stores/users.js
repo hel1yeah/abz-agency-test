@@ -15,7 +15,7 @@ export const useUserStore = defineStore('users', () => {
     total_pages.value = 0;
     try {
       const response = await getUsersAxios(page, count);
-      if ((response.status = RESPONSE_STATUS[200])) {
+      if (response.status === RESPONSE_STATUS[200]) {
         if (users.value === null) {
           users.value = response?.data?.users;
         } else {

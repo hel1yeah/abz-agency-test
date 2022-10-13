@@ -2,7 +2,7 @@
   <header class="header">
     <div class="container">
       <div class="header__inner">
-        <img class="header__img" src="./../assets/images/logo.svg" alt="logo" />
+        <img class="header__img" src="@/assets/images/logo.svg" alt="logo" />
         <div class="header__buttons">
           <app-button>Users</app-button>
           <app-button>Sign up</app-button>

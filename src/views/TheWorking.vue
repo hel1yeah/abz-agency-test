@@ -15,7 +15,7 @@
 <script setup>
 import WorkingCard from '@/components/working/WorkingCard.vue';
 import { useUserStore } from '@/stores/users';
-import { nextTick, onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import AppButton from '@/components/common/AppButton.vue';
 
 const page = ref(1);
