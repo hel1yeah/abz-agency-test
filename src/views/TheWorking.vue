@@ -1,5 +1,5 @@
 <template>
-  <div class="the-working">
+  <div class="the-working" id="the-working">
     <h1 class="the-working__head">Working with GET request</h1>
     <div class="container">
       <div class="the-working__cards">
@@ -14,17 +14,17 @@
 
 <script setup>
 import WorkingCard from '@/components/working/WorkingCard.vue';
+import { DEFAULT_REQUEST_PAGES } from '@/common/constants.js'
 import { useUserStore } from '@/stores/users';
 import { ref } from 'vue';
 import AppButton from '@/components/common/AppButton.vue';
 
-const page = ref(1);
-const count = ref(6);
+const page = ref(DEFAULT_REQUEST_PAGES.PAGE);
+const count = ref(DEFAULT_REQUEST_PAGES.COUNT);
 
 const storeUser = useUserStore();
 
 const loader = storeUser.loader;
-const total_pages = storeUser.total_pages;
 const arrUsers = storeUser.arrUsers;
 const getterTotalPages = storeUser.getterTotalPages;
 
@@ -40,7 +40,7 @@ const onShowMore = () => {
 };
 
 const disabled = () => {
-  return page.value >= storeUser.getterTotalPages.value;
+  return page.value >= getterTotalPages.value;
 };
 </script>
 
@@ -56,6 +56,7 @@ const disabled = () => {
     display: grid;
     gap: 29px;
     grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+    overflow: hidden;
     @include w1024 {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       padding: 50px 60px 0;

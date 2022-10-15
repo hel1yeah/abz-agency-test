@@ -31,12 +31,15 @@ function toggle() {
 .tooltip-wrapper {
   display: inline-block;
   position: relative;
+  width: 100%;
 }
 .tooltip-inner {
   display: flex;
   cursor: pointer;
+  justify-content: center;
 }
 .tooltip {
+  white-space: nowrap;
   position: absolute;
   bottom: -37px;
   left: 20px;

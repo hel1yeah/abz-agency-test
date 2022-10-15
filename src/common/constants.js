@@ -4,4 +4,9 @@ const RESPONSE_STATUS = {
   422: 422,
 };
 
-export { RESPONSE_STATUS };
+const DEFAULT_REQUEST_PAGES = {
+  PAGE: 1,
+  COUNT: 6
+}
+
+export { RESPONSE_STATUS, DEFAULT_REQUEST_PAGES };

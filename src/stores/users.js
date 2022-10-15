@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { getUsersAxios } from '@/api/apiUsers.js';
-import { RESPONSE_STATUS } from '@/common/constants.js';
+import { RESPONSE_STATUS, DEFAULT_REQUEST_PAGES } from '@/common/constants.js';
 
 export const useUserStore = defineStore('users', () => {
   const users = ref(null);
@@ -9,7 +9,7 @@ export const useUserStore = defineStore('users', () => {
   const loader = ref(false);
   const total_pages = ref(1);
 
-  async function getUsers(page, count) {
+  async function getUsers(page = DEFAULT_REQUEST_PAGES.PAGE, count = DEFAULT_REQUEST_PAGES.COUNT) {
     error.value = null;
     loader.value = true;
     total_pages.value = 0;

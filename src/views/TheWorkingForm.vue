@@ -1,5 +1,5 @@
 <template>
-  <div class="the-working-form">
+  <div class="the-working-form" id="the-working-form">
     <h2 class="the-working-form__header">Working with POST request</h2>
     <div class="the-working-form__inner">
       <app-input :type="'name'" :label="'Your name'" @setInput="setForm" />
@@ -12,17 +12,30 @@
       />
     </div>
     <position-chekboxes @setPositionId="setForm"></position-chekboxes>
+    <app-file-input @setFile="setPhoto"></app-file-input>
+    <app-button class="the-working-form__button" @click="registrationUser">Sing Up</app-button>
   </div>
 </template>
 
 <script setup>
 import AppInput from '@/components/common/AppInput.vue';
 import PositionChekboxes from '@/components/positions/PositionChekboxes.vue';
+import AppFileInput from '@/components/common/AppFileInput.vue';
+import AppButton from '@/components/common/AppButton.vue';
 import { reactive } from 'vue';
+import { useFormStore } from '@/stores/form.js';
 
+const store = useFormStore();
 function setForm(e) {
   form[e.type] = e.value;
-  console.log(form)
+}
+
+function setPhoto(e) {
+  form.photo = e;
+}
+
+function registrationUser() {
+  store.registrationUser(form);
 }
 
 const form = reactive({
@@ -32,6 +45,8 @@ const form = reactive({
   position_id: 1,
   photo: '',
 });
+
+store.getToken();
 </script>
 
 <style scoped lang="scss">
@@ -49,6 +64,9 @@ const form = reactive({
     @include w768 {
       padding: 0 16px;
     }
+  }
+  &__button {
+    margin: 50px auto 0;
   }
 }
 </style>

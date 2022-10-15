@@ -4,8 +4,8 @@
       <div class="header__inner">
         <img class="header__img" src="@/assets/images/logo.svg" alt="logo" />
         <div class="header__buttons">
-          <app-button>Users</app-button>
-          <app-button>Sign up</app-button>
+          <app-button v-scroll-to="'#the-working'">Users</app-button>
+          <app-button v-scroll-to="'#the-working-form'">Sign up</app-button>
         </div>
       </div>
     </div>
@@ -38,7 +38,6 @@ import AppButton from '@/components/common/AppButton.vue';
     @include w360 {
       gap: 14px;
     }
-
   }
   &__buttons {
     display: flex;

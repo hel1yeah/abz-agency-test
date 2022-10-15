@@ -68,11 +68,12 @@ onDeactivated(() => {
     overflow: hidden;
   }
   &__text {
-    max-width: 100%;
+    max-width: 80%;
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
   }
   &__name {
     margin: 20px 0 0 0;

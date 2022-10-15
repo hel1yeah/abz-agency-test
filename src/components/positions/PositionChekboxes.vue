@@ -29,7 +29,7 @@ store.getPositions();
 
 const onChecked = (id) => {
   cheked.value = id;
-  // emits('setPositionId',  cheked.value);
+
   emits('setPositionId', {
     value: id,
     success: true,
@@ -45,7 +45,7 @@ function isChecked(id) {
 
 <style scoped lang="scss">
 .position-chekboxes {
-  margin: 43px auto 400px;
+  margin: 43px auto 0px;
   width: 100%;
   max-width: 380px;
   @include w768 {
