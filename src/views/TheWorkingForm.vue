@@ -12,8 +12,11 @@
       />
     </div>
     <position-chekboxes @setPositionId="setForm"></position-chekboxes>
-    <app-file-input @setFile="setPhoto"></app-file-input>
-    <app-button class="the-working-form__button" @click="registrationUser">Sing Up</app-button>
+    <app-file-input @setFile="setForm"></app-file-input>
+    <app-button class="the-working-form__button" @click="registrationUser" :disabled="!checkFormObg"
+      >Sing Up</app-button
+    >
+    <span v-if="store.getError" class="the-working-form__error">{{ store.getError }}</span>
   </div>
 </template>
 
@@ -22,21 +25,8 @@ import AppInput from '@/components/common/AppInput.vue';
 import PositionChekboxes from '@/components/positions/PositionChekboxes.vue';
 import AppFileInput from '@/components/common/AppFileInput.vue';
 import AppButton from '@/components/common/AppButton.vue';
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { useFormStore } from '@/stores/form.js';
-
-const store = useFormStore();
-function setForm(e) {
-  form[e.type] = e.value;
-}
-
-function setPhoto(e) {
-  form.photo = e;
-}
-
-function registrationUser() {
-  store.registrationUser(form);
-}
 
 const form = reactive({
   name: '',
@@ -46,7 +36,36 @@ const form = reactive({
   photo: '',
 });
 
-store.getToken();
+const bo0leanObjInputs = reactive({
+  name: false,
+  email: false,
+  phone: false,
+  position_id: 1,
+  photo: false,
+});
+
+const store = useFormStore();
+
+function setForm(e) {
+  form[e.type] = e.value;
+  bo0leanObjInputs[e.type] = e.success;
+}
+
+function registrationUser() {
+  store.registrationUser(form);
+}
+
+function deleteUndef() {
+  delete bo0leanObjInputs['undefined'];
+}
+
+const checkFormObg = computed(() => {
+  deleteUndef();
+  return Object.keys(bo0leanObjInputs).every(
+    (key) => bo0leanObjInputs[key] === true || bo0leanObjInputs[key] > 0
+  );
+});
+// store.getToken();
 </script>
 
 <style scoped lang="scss">
@@ -67,6 +86,11 @@ store.getToken();
   }
   &__button {
     margin: 50px auto 0;
+  }
+  &__error {
+    text-align: center;
+    display: block;
+    color: $error-color;
   }
 }
 </style>

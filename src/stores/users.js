@@ -30,7 +30,7 @@ export const useUserStore = defineStore('users', () => {
       }
     } catch (e) {
       users.value = null;
-      error.value = e;
+      error.value = e?.response?.data?.message;
       total_pages.value = 0;
       loader.value = false;
     }
@@ -42,6 +42,9 @@ export const useUserStore = defineStore('users', () => {
   const getterTotalPages = computed(() => {
     return total_pages;
   });
+  const getLoader = computed(() => {
+    return loader.value;
+  });
 
-  return { getUsers, users, loader, total_pages, arrUsers, getterTotalPages };
+  return { getUsers, users, getLoader, total_pages, arrUsers, getterTotalPages };
 });

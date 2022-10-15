@@ -21,7 +21,7 @@ export const usePositionsStore = defineStore('positions', () => {
       }
     } catch (e) {
       positions.value = null;
-      error.value = e;
+      error.value = e.response.data.message;
       loader.value = false;
     }
   }
@@ -30,8 +30,13 @@ export const usePositionsStore = defineStore('positions', () => {
     return positions;
   });
 
+  const getLoader = computed(() => {
+    return loader.value
+  })
+
   return {
     getPositions,
     arrPositions,
+    getLoader,
   };
 });

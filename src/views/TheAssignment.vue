@@ -9,7 +9,9 @@
           with accessibility in mind. They should also be excited to learn, as the world of
           Front-End Development keeps evolving.
         </p>
-        <app-button class="the-assignment__button">Sign up</app-button>
+        <app-button v-scroll-to="'#the-working-form'" class="the-assignment__button">
+          Sign up
+        </app-button>
       </div>
     </div>
   </div>
@@ -46,7 +48,7 @@ export default {
       color: rgba(0, 0, 0, 0.5);
     }
   }
-  @include w768{
+  @include w768 {
     padding: 89px 15px 88px;
   }
   @include w360 {

@@ -1,5 +1,5 @@
 <template>
-  <div class="position-chekboxes">
+  <div v-if="!store.getLoader" class="position-chekboxes">
     <span>Select your position</span>
     <div class="position-chekboxes__inner">
       <app-chekbox
@@ -12,12 +12,16 @@
       </app-chekbox>
     </div>
   </div>
+  <div v-else class="position-chekboxes__loader">
+    <app-loader></app-loader>
+  </div>
 </template>
 
 <script setup>
 import { usePositionsStore } from '@/stores/positions.js';
 import AppChekbox from '@/components/common/AppChekbox.vue';
 import { ref } from 'vue';
+import AppLoader from '@/components/common/AppLoader.vue';
 
 const store = usePositionsStore();
 const emits = defineEmits(['setPositionId']);
@@ -58,6 +62,10 @@ function isChecked(id) {
     flex-direction: column;
     margin: 11px 0 0 0;
     gap: 7px;
+  }
+  &__loader {
+    @include center;
+    height: 161px;
   }
 }
 </style>

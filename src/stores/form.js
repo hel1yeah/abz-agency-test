@@ -12,19 +12,13 @@ export const useFormStore = defineStore('form', () => {
 
   async function getToken() {
     token.value = null;
-    error.value = null;
-    loader.value = true;
     try {
       const response = await getTokenAxios();
       if (response.status === RESPONSE_STATUS[200]) {
         token.value = response?.data?.token;
-        error.value = null;
-        loader.value = false;
       }
     } catch (e) {
-      token.value = null;
-      error.value = e;
-      loader.value = false;
+      console.log('getToken', e);
     }
   }
   async function registrationUser(form) {
@@ -38,23 +32,31 @@ export const useFormStore = defineStore('form', () => {
       const response = await postRegistrationUserAxios(token.value, data);
       if (response.status === RESPONSE_STATUS[200]) {
         const store = useUserStore();
+        store.users.value = null;
         store.getUsers();
       }
     } catch (e) {
-      console.log(e);
-      token.value = null;
-      error.value = e;
+      error.value = e?.response?.data?.message;
       loader.value = false;
+      clearError();
     }
+  }
+
+  function clearError() {
+    setTimeout(() => {
+      error.value = null;
+    }, 10000);
   }
 
   const compToken = computed(() => {
     return token.value;
   });
+  const getError = computed(() => error.value);
 
   return {
     getToken,
     registrationUser,
     compToken,
+    getError,
   };
 });

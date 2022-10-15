@@ -1,5 +1,5 @@
 <template>
-  <div class="the-working" id="the-working">
+  <div v-if="!storeUser.getLoader" class="the-working" id="the-working">
     <h1 class="the-working__head">Working with GET request</h1>
     <div class="container">
       <div class="the-working__cards">
@@ -10,21 +10,25 @@
       </app-button>
     </div>
   </div>
+  <div v-if="storeUser.getLoader" class="container the-working__loader">
+    <app-loader></app-loader>
+  </div>
 </template>
 
 <script setup>
 import WorkingCard from '@/components/working/WorkingCard.vue';
-import { DEFAULT_REQUEST_PAGES } from '@/common/constants.js'
-import { useUserStore } from '@/stores/users';
+import { DEFAULT_REQUEST_PAGES } from '@/common/constants.js';
+import { useUserStore } from '@/stores/users.js';
 import { ref } from 'vue';
 import AppButton from '@/components/common/AppButton.vue';
+import AppLoader from '@/components/common/AppLoader.vue';
 
 const page = ref(DEFAULT_REQUEST_PAGES.PAGE);
 const count = ref(DEFAULT_REQUEST_PAGES.COUNT);
 
 const storeUser = useUserStore();
 
-const loader = storeUser.loader;
+
 const arrUsers = storeUser.arrUsers;
 const getterTotalPages = storeUser.getterTotalPages;
 
@@ -70,6 +74,9 @@ const disabled = () => {
   }
   &__button {
     margin: 50px auto 0;
+  }
+  &__loader {
+    @include center
   }
 }
 </style>

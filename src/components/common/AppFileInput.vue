@@ -36,8 +36,8 @@ function restFile(e) {
   const fileType = file.type;
   const strSize = byteSize(file.size, { unitSeparator: ' ' });
   const arrSize = strSize.split(' ');
-  const sizeUnit = arrSize[1];
   const sizeValue = Number(arrSize[0]);
+  const sizeUnit = arrSize[1];
 
   return {
     file,
@@ -50,11 +50,31 @@ function restFile(e) {
 function setError(str) {
   isError.value = true;
   error.value = str;
+
+  emits('setFile', {
+    value: '',
+    success: false,
+    type: 'photo',
+  });
+
+  clearError();
 }
 
-function setSuccess() {
+function setSuccess(file) {
   isError.value = false;
   error.value = '';
+  emits('setFile', {
+    value: file,
+    success: true,
+    type: 'photo',
+  });
+}
+
+function clearError() {
+  setTimeout(() => {
+    isError.value = false;
+    error.value = '';
+  }, 10000);
 }
 
 function chekFile(e) {
@@ -72,8 +92,7 @@ function chekFile(e) {
     setError('The photo size must not be greater than 5 Mb.');
     return;
   }
-  setSuccess();
-  emits('setFile', file);
+  setSuccess(file);
   return;
 }
 </script>

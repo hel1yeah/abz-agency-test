@@ -56,7 +56,7 @@ function changeInput() {
       setError('min 2 max 60 length');
       return;
     }
-    setSuccess('name');
+    setSuccess();
     return;
   }
   if (props.type === 'email') {
@@ -68,7 +68,7 @@ function changeInput() {
       setError('Not valid email');
       return;
     }
-    setSuccess('email');
+    setSuccess();
     return;
   }
   if (props.type === 'phone') {
@@ -79,14 +79,14 @@ function changeInput() {
       setError('Not valid phone +38 (XXX) XXX - XX - XX');
       return;
     }
-    setSuccess('phone');
+    setSuccess();
     return;
   }
   setError();
   return;
 }
 
-function setSuccess(type) {
+function setSuccess() {
   errorMessage.value = '';
   success.value = true;
   successValue.value = value.value;
@@ -94,13 +94,19 @@ function setSuccess(type) {
   emits('setInput', {
     value: successValue.value,
     success: success.value,
-    type: type,
+    type: props.type,
   });
 }
 
 function setError(message = '') {
   errorMessage.value = message;
   success.value = false;
+
+  emits('setInput', {
+    value: '',
+    success: success.value,
+    type: props.type,
+  });
 }
 </script>
 

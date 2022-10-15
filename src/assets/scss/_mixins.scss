@@ -13,3 +13,9 @@
     @content;
   }
 }
+
+@mixin center {
+  display: grid;
+  place-items: center;
+  height: 400px;
+}
