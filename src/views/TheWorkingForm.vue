@@ -52,7 +52,9 @@ function setForm(e) {
 }
 
 function registrationUser() {
-  store.registrationUser(form);
+  store.getToken().then(() => {
+    store.registrationUser(form);
+  });
 }
 
 function deleteUndef() {
