@@ -1,5 +1,4 @@
 import { ref, computed } from 'vue';
-import { isEmpty } from 'lodash/isEmpty';
 import { defineStore } from 'pinia';
 import { getUsersAxios } from '@/api/apiUsers.js';
 import { RESPONSE_STATUS, DEFAULT_REQUEST_PAGES } from '@/common/constants.js';
