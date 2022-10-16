@@ -2,13 +2,14 @@ import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { getTokenAxios } from '@/api/apiToken.js';
 import { postRegistrationUserAxios } from '@/api/apiRegistration.js';
-import { RESPONSE_STATUS } from '@/common/constants.js';
-import { useUserStore } from '@/stores/users';
+import { DEFAULT_REQUEST_PAGES, RESPONSE_STATUS } from '@/common/constants.js';
+import { useUserStore } from '@/stores/users.js';
 
 export const useFormStore = defineStore('form', () => {
   const token = ref('');
   const error = ref(null);
   const loader = ref(false);
+  const showModal = ref(false);
 
   async function getToken() {
     token.value = null;
@@ -30,10 +31,11 @@ export const useFormStore = defineStore('form', () => {
     loader.value = true;
     try {
       const response = await postRegistrationUserAxios(token.value, data);
-      if (response.status === RESPONSE_STATUS[200]) {
+      if (response.status === RESPONSE_STATUS[201]) {
+        showModal.value = true;
         const store = useUserStore();
-        store.users.value = null;
-        store.getUsers();
+        store.usersToNull();
+        store.getUsers(DEFAULT_REQUEST_PAGES.PAGE, DEFAULT_REQUEST_PAGES.COUNT);
       }
     } catch (e) {
       error.value = e?.response?.data?.message;
@@ -48,15 +50,25 @@ export const useFormStore = defineStore('form', () => {
     }, 10000);
   }
 
+  function closeModal() {
+    showModal.value = false;
+  }
+
   const compToken = computed(() => {
     return token.value;
   });
   const getError = computed(() => error.value);
+
+  const getShowModal = computed(() => {
+    return showModal.value;
+  });
 
   return {
     getToken,
     registrationUser,
     compToken,
     getError,
+    getShowModal,
+    closeModal,
   };
 });

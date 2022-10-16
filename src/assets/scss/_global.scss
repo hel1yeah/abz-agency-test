@@ -3,7 +3,6 @@ html {
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
-  padding: 0 0 100px 0;
   scroll-behavior: smooth;
   background: {
     color: $background-color;
@@ -36,4 +35,8 @@ p {
 
 input[type='file'] {
   display: none;
+}
+
+#app {
+  position: relative;
 }

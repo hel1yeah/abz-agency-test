@@ -2,11 +2,12 @@ const RESPONSE_STATUS = {
   200: 200,
   404: 404,
   422: 422,
+  201: 201,
 };
 
 const DEFAULT_REQUEST_PAGES = {
   PAGE: 1,
-  COUNT: 6
-}
+  COUNT: 6,
+};
 
 export { RESPONSE_STATUS, DEFAULT_REQUEST_PAGES };

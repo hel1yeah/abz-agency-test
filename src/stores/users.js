@@ -1,4 +1,5 @@
 import { ref, computed } from 'vue';
+import { isEmpty } from 'lodash/isEmpty';
 import { defineStore } from 'pinia';
 import { getUsersAxios } from '@/api/apiUsers.js';
 import { RESPONSE_STATUS, DEFAULT_REQUEST_PAGES } from '@/common/constants.js';
@@ -13,12 +14,16 @@ export const useUserStore = defineStore('users', () => {
     error.value = null;
     loader.value = true;
     total_pages.value = 0;
+    console.log('1 users.value', users.value);
     try {
       const response = await getUsersAxios(page, count);
       if (response.status === RESPONSE_STATUS[200]) {
+        console.log('2 users.value', users.value);
         if (users.value === null) {
+          console.log('3 users.value', users.value);
           users.value = response?.data?.users;
         } else {
+          console.log('4 users.value', users.value);
           response?.data?.users.forEach((user) => {
             users.value.push(user);
           });
@@ -36,6 +41,10 @@ export const useUserStore = defineStore('users', () => {
     }
   }
 
+  function usersToNull() {
+    users.value = null;
+  }
+
   const arrUsers = computed(() => {
     return users;
   });
@@ -46,5 +55,5 @@ export const useUserStore = defineStore('users', () => {
     return loader.value;
   });
 
-  return { getUsers, users, getLoader, total_pages, arrUsers, getterTotalPages };
+  return { getUsers, usersToNull, users, getLoader, total_pages, arrUsers, getterTotalPages };
 });
