@@ -73,7 +73,6 @@ onDeactivated(() => {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
   }
   &__name {
     margin: 20px 0 0 0;

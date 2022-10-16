@@ -31,8 +31,8 @@ export const usePositionsStore = defineStore('positions', () => {
   });
 
   const getLoader = computed(() => {
-    return loader.value
-  })
+    return loader.value;
+  });
 
   return {
     getPositions,

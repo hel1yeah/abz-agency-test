@@ -28,7 +28,6 @@ const count = ref(DEFAULT_REQUEST_PAGES.COUNT);
 
 const storeUser = useUserStore();
 
-
 const arrUsers = storeUser.arrUsers;
 const getterTotalPages = storeUser.getterTotalPages;
 
@@ -76,7 +75,7 @@ const disabled = () => {
     margin: 50px auto 0;
   }
   &__loader {
-    @include center
+    @include center;
   }
 }
 </style>
